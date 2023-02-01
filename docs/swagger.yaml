@@ -1,0 +1,45 @@
+info:
+  contact: {}
+paths:
+  /api/ffmpeg:
+    get:
+      consumes:
+      - multipart/form-data
+      description: FFmpeg api
+      parameters:
+      - description: ffmpeg参数
+        in: formData
+        name: arg
+        required: true
+        type: string
+      - description: file
+        in: formData
+        name: file
+        required: true
+        type: file
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 文件内容字节流
+          schema:
+            items:
+              type: integer
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            allOf:
+            - type: object
+            - properties:
+                data:
+                  type: string
+                errors:
+                  type: string
+                "no":
+                  type: integer
+              type: object
+      summary: FFmpeg api
+      tags:
+      - FFmpeg
+swagger: "2.0"
